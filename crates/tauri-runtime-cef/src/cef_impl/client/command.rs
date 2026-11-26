@@ -19,6 +19,10 @@ use crate::runtime::{Message, RuntimeContext};
 /// hosted as a child view with no browser UI, so Ctrl+N opens a real Chrome window
 /// next to the app's and Ctrl+T a tab in a window the app does not own. An app
 /// window has no tab strip for the rest to act on.
+///
+/// Ctrl+W, Ctrl+Shift+W and Ctrl+Shift+Q close the hosting browser itself. Chrome
+/// reserves them, so the page cannot `preventDefault` them, and the window is left
+/// without a webview to show or to answer its own close request.
 const WINDOW_AND_TAB_COMMANDS: &[&CStr] = &[
   cef::resources::IDC_NEW_WINDOW,
   cef::resources::IDC_NEW_INCOGNITO_WINDOW,
@@ -42,6 +46,9 @@ const WINDOW_AND_TAB_COMMANDS: &[&CStr] = &[
   cef::resources::IDC_SELECT_TAB_6,
   cef::resources::IDC_SELECT_TAB_7,
   cef::resources::IDC_TAB_SEARCH,
+  cef::resources::IDC_CLOSE_TAB,
+  cef::resources::IDC_CLOSE_WINDOW,
+  cef::resources::IDC_EXIT,
 ];
 
 /// Commands that treat the app's UI as a web document to be exported.

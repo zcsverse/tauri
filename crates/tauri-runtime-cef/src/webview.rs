@@ -313,7 +313,8 @@ pub(crate) type DevToolsProtocolHandler = dyn Fn(DevToolsProtocol) + Send + Sync
 #[non_exhaustive]
 pub enum ChromeCommandGroup {
   /// Ctrl+N, Ctrl+Shift+N, Ctrl+T and the whole tab strip: new window, new incognito
-  /// window, new tab, duplicate, restore, reorder, and select tab 1-8.
+  /// window, new tab, duplicate, restore, reorder, select tab 1-8, and close tab,
+  /// close window and exit (Ctrl+W, Ctrl+Shift+W, Ctrl+Shift+Q).
   ///
   /// An app window has no tab strip for these to act on, and the windows they open are
   /// real Chrome windows the application does not own.
